@@ -1,0 +1,24 @@
+<script>
+	var windowheight=$(window).height();
+	var menubarheight=$("#menubar").height();
+	var codecontainerHeight=windowheight-menubarheight;
+	$(".codecontainer").height(codecontainerHeight+"px");
+	
+	$(".toggle").click(function(){
+	$(this).toggleClass("selected");
+	var activeDiv=$(this).html();
+	
+	$("#"+activeDiv+"container").toggle();
+	
+	
+	var showdiv=$(".codecontainer").filter(function(){
+	return($(this).css("display")!="none");
+	}).length;
+	var width=100/showdiv;
+	$(".codecontainer").css("width",width+"%");
+	});
+	$("#runbtn").click(function(){
+	$('#resultFrame').contents().find('html').html("<style>"+$("#csscode").val()+"</style>"+$("#htmlcode").val());
+document.getElementById("resultFrame").contentWindow.eval( $("#jscode").val() );
+	});
+	</script>
